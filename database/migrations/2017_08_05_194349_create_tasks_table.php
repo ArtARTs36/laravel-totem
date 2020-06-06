@@ -4,7 +4,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Studio\Totem\Database\TotemMigration;
 
-class CreateTasksTable extends TotemMigration
+class CreateTasksTable
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class CreateTasksTable extends TotemMigration
      */
     public function up()
     {
-        Schema::connection(TOTEM_DATABASE_CONNECTION)
-            ->create(TOTEM_TABLE_PREFIX.'tasks', function (Blueprint $table) {
+        Schema::connection(\Studio\Totem\Helpers\TotemHelper::getDbConnection())
+            ->create(\Studio\Totem\Helpers\TotemHelper::getTablePrefix('tasks'), function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('description');
                 $table->string('command');
@@ -36,7 +36,7 @@ class CreateTasksTable extends TotemMigration
      */
     public function down()
     {
-        Schema::connection(TOTEM_DATABASE_CONNECTION)
-            ->dropIfExists(TOTEM_TABLE_PREFIX.'tasks');
+        Schema::connection(\Studio\Totem\Helpers\TotemHelper::getDbConnection())
+            ->dropIfExists(\Studio\Totem\Helpers\TotemHelper::getTablePrefix('tasks'));
     }
 }

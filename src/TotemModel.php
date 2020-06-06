@@ -4,20 +4,27 @@ namespace Studio\Totem;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Studio\Totem\Helpers\TotemHelper;
 
-class TotemModel extends Model
+abstract class TotemModel extends Model
 {
-    protected $connection = TOTEM_DATABASE_CONNECTION;
+    /**
+     * @return string
+     */
+    public function getConnectionName()
+    {
+        return TotemHelper::getDbConnection();
+    }
 
     /**
      * @return mixed
      */
     public function getTable()
     {
-        if (Str::contains(parent::getTable(), TOTEM_TABLE_PREFIX)) {
-            return parent::getTable();
+        if (Str::contains(static::getTable(), TotemHelper::getTablePrefix())) {
+            return static::getTable();
         }
 
-        return TOTEM_TABLE_PREFIX.parent::getTable();
+        return TotemHelper::getTablePrefix(static::getTable());
     }
 }

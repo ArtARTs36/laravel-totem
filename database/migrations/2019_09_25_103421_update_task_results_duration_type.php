@@ -13,9 +13,9 @@ class UpdateTaskResultsDurationType extends TotemMigration
      */
     public function up()
     {
-        Schema::connection(TOTEM_DATABASE_CONNECTION)
-            ->table(TOTEM_TABLE_PREFIX.'task_results', function (Blueprint $table) {
-                $table->decimal('duration', 24, 14)->charset('')->collation('')->change();
+        Schema::connection(\Studio\Totem\Helpers\TotemHelper::getDbConnection())
+            ->table(\Studio\Totem\Helpers\TotemHelper::getTablePrefix('task_results'), function (Blueprint $table) {
+                $table->float('duration', 24, 14)->charset('')->collation('')->change();
             });
     }
 
@@ -26,8 +26,8 @@ class UpdateTaskResultsDurationType extends TotemMigration
      */
     public function down()
     {
-        Schema::connection(TOTEM_DATABASE_CONNECTION)
-            ->table(TOTEM_TABLE_PREFIX.'task_results', function (Blueprint $table) {
+        Schema::connection(\Studio\Totem\Helpers\TotemHelper::getDbConnection())
+            ->table(\Studio\Totem\Helpers\TotemHelper::getTablePrefix('task_results'), function (Blueprint $table) {
                 $table->string('duration', 255)->change();
             });
     }

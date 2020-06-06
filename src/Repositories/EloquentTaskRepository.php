@@ -16,6 +16,7 @@ use Studio\Totem\Events\Deleting;
 use Studio\Totem\Events\Executed;
 use Studio\Totem\Events\Updated;
 use Studio\Totem\Events\Updating;
+use Studio\Totem\Helpers\TotemHelper;
 use Studio\Totem\Result;
 use Studio\Totem\Task;
 
@@ -30,7 +31,7 @@ class EloquentTaskRepository implements TaskInterface
     {
         $result = new Result;
 
-        return (new Task)->select(TOTEM_TABLE_PREFIX.'tasks.*')
+        return (new Task)->select(TotemHelper::getTablePrefix('tasks.*'))
             ->selectSub(
                 $result->getLastRun(),
                 'last_ran_at'

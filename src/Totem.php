@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Schema;
+use Studio\Totem\Helpers\TotemHelper;
 use Symfony\Component\Console\Command\Command;
 
 class Totem
@@ -93,12 +94,12 @@ class Totem
      */
     public static function baseTableExists(): bool
     {
-        if (Cache::get('totem.table.'.TOTEM_TABLE_PREFIX.'tasks')) {
+        if (Cache::get('totem.table.'.TotemHelper::getTablePrefix('tasks'))) {
             return true;
         }
 
-        if (Schema::hasTable(TOTEM_TABLE_PREFIX.'tasks')) {
-            Cache::forever('totem.table.'.TOTEM_TABLE_PREFIX.'tasks', true);
+        if (Schema::hasTable(TotemHelper::getTablePrefix('tasks'))) {
+            Cache::forever('totem.table.'.TotemHelper::getTablePrefix('tasks'), true);
 
             return true;
         }

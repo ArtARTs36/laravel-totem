@@ -11,6 +11,7 @@ use Illuminate\Support\ServiceProvider;
 use Studio\Totem\Console\Commands\ListSchedule;
 use Studio\Totem\Console\Commands\PublishAssets;
 use Studio\Totem\Contracts\TaskInterface;
+use Studio\Totem\Helpers\TotemHelper;
 use Studio\Totem\Repositories\EloquentTaskRepository;
 use Studio\Totem\Totem;
 
@@ -55,18 +56,6 @@ class TotemServiceProvider extends ServiceProvider
             'totem'
         );
 
-        if (! defined('TOTEM_PATH')) {
-            define('TOTEM_PATH', realpath(__DIR__.'/../../'));
-        }
-
-        if (! defined('TOTEM_TABLE_PREFIX')) {
-            define('TOTEM_TABLE_PREFIX', config('totem.table_prefix'));
-        }
-
-        if (! defined('TOTEM_DATABASE_CONNECTION')) {
-            define('TOTEM_DATABASE_CONNECTION', config('totem.database_connection', Schema::getConnection()->getName()));
-        }
-
         $this->commands([
             ListSchedule::class,
             PublishAssets::class,
@@ -99,23 +88,23 @@ class TotemServiceProvider extends ServiceProvider
     public function defineAssetPublishing()
     {
         $this->publishes([
-            TOTEM_PATH.'/public/js' => public_path('vendor/totem/js'),
+            TotemHelper::getPath('/public/js') => public_path('vendor/totem/js'),
         ], 'totem-assets');
 
         $this->publishes([
-            TOTEM_PATH.'/public/css' => public_path('vendor/totem/css'),
+            TotemHelper::getPath('/public/css') => public_path('vendor/totem/css'),
         ], 'totem-assets');
 
         $this->publishes([
-            TOTEM_PATH.'/public/img' => public_path('vendor/totem/img'),
+            TotemHelper::getPath('/public/img') => public_path('vendor/totem/img'),
         ], 'totem-assets');
 
         $this->publishes([
-            TOTEM_PATH.'/resources/views' => resource_path('views/vendor/totem'),
+            TotemHelper::getPath('/resources/views') => resource_path('views/vendor/totem'),
         ], 'totem-views');
 
         $this->publishes([
-            TOTEM_PATH.'/config' => config_path(),
+            TotemHelper::getPath('/config') => config_path(),
         ], 'totem-config');
     }
 }
