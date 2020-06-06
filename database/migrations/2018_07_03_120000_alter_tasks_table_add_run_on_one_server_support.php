@@ -13,7 +13,7 @@ class AlterTasksTableAddRunOnOneServerSupport extends \Illuminate\Database\Migra
      */
     public function up()
     {
-        Schema::connection(\Studio\Totem\Helpers\TotemHelper::getTablePrefix())
+        Schema::connection(\Studio\Totem\Helpers\TotemHelper::getDbConnection())
             ->table(\Studio\Totem\Helpers\TotemHelper::getTablePrefix('tasks'), function (Blueprint $table) {
                 $table->boolean('run_on_one_server')->default(false);
             });
