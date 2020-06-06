@@ -21,10 +21,10 @@ abstract class TotemModel extends Model
      */
     public function getTable()
     {
-        if (Str::contains(static::getTable(), TotemHelper::getTablePrefix())) {
-            return static::getTable();
+        if (($table = parent::getTable()) && Str::contains($table, TotemHelper::getTablePrefix())) {
+            return $table;
         }
 
-        return TotemHelper::getTablePrefix(static::getTable());
+        return TotemHelper::getTablePrefix($table);
     }
 }

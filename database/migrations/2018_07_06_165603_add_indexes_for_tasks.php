@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Schema;
 use Studio\Totem\Database\TotemMigration;
 use Studio\Totem\Helpers\TotemHelper;
 
-class AddIndexesForTasks
+class AddIndexesForTasks extends \Illuminate\Database\Migrations\Migration
 {
     /**
      * Run the migrations.

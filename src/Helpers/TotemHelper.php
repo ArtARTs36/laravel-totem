@@ -2,6 +2,8 @@
 
 namespace Studio\Totem\Helpers;
 
+use Illuminate\Support\Facades\Schema;
+
 class TotemHelper
 {
     /**

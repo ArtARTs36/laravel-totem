@@ -4,7 +4,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Studio\Totem\Database\TotemMigration;
 
-class AlterTasksTableAddAutoCleanupNumAndTypeFields
+class AlterTasksTableAddAutoCleanupNumAndTypeFields extends \Illuminate\Database\Migrations\Migration
 {
     /**
      * Run the migrations.
