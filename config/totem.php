@@ -222,7 +222,7 @@ return [
     'api' => [
         'middleware' => env('TOTEM_API_MIDDLEWARE', 'api'),
     ],
-    'table_prefix' => env('TOTEM_TABLE_PREFIX', ''),
+    'table_prefix' => env('TOTEM_TABLE_PREFIX', 'totem'),
     'artisan' => [
         'command_filter' => [],
         'whitelist' => true,
