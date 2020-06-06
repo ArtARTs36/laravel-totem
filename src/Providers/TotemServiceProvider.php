@@ -24,14 +24,8 @@ class TotemServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        try {
-            if (Totem::baseTableExists()) {
-                $this->app->register(ConsoleServiceProvider::class);
-            }
-        } catch (\PDOException $ex) {
-            // This will trigger if DB cannot be connected to
-            Log::error($ex->getMessage());
-        }
+        $this->app->register(ConsoleServiceProvider::class);
+
         $this->registerResources();
         $this->defineAssetPublishing();
 
