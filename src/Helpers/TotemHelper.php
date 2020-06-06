@@ -2,8 +2,6 @@
 
 namespace Studio\Totem\Helpers;
 
-use Illuminate\Support\Facades\Schema;
-
 class TotemHelper
 {
     /**
@@ -13,7 +11,7 @@ class TotemHelper
      */
     public static function getDbConnection(): string
     {
-        return config('totem.database_connection', Schema::getConnection()->getName());
+        return config('totem.database_connection');
     }
 
     /**

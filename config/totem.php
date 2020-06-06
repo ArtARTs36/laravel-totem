@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
+
 return [
     'frequencies'  => [
         [
@@ -227,7 +229,7 @@ return [
         'command_filter' => [],
         'whitelist' => true,
     ],
-    'database_connection' => env('TOTEM_DATABASE_CONNECTION'),
+    'database_connection' => env('TOTEM_DATABASE_CONNECTION', Schema::getConnection()->getName()),
 
     'broadcasting' => [
         'enabled' => env('TOTEM_BROADCASTING_ENABLED', true),
