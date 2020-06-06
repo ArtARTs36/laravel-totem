@@ -4,7 +4,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Studio\Totem\Database\TotemMigration;
 
-class AlterTasksTableAddRunOnOneServerSupport extends TotemMigration
+class AlterTasksTableAddRunOnOneServerSupport
 {
     /**
      * Run the migrations.

@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Schema;
 use Studio\Totem\Database\TotemMigration;
 use Studio\Totem\Helpers\TotemHelper;
 
-class CreateFrequencyParametersTable extends TotemMigration
+class CreateFrequencyParametersTable
 {
     /**
      * Run the migrations.

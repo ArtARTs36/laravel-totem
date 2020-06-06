@@ -4,7 +4,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Studio\Totem\Database\TotemMigration;
 
-class CreateTaskResultsTable extends TotemMigration
+class CreateTaskResultsTable
 {
     /**
      * Run the migrations.
