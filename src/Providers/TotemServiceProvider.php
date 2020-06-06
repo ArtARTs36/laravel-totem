@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
+use Studio\Totem\Console\Commands\ListenSchedule;
 use Studio\Totem\Console\Commands\ListSchedule;
 use Studio\Totem\Console\Commands\PublishAssets;
 use Studio\Totem\Contracts\TaskInterface;
@@ -55,6 +56,7 @@ class TotemServiceProvider extends ServiceProvider
         $this->commands([
             ListSchedule::class,
             PublishAssets::class,
+            ListenSchedule::class,
         ]);
 
         $this->app->bindIf('totem.tasks', EloquentTaskRepository::class, true);
