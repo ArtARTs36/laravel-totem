@@ -4,6 +4,7 @@ namespace Studio\Totem\Providers;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 use Studio\Totem\Events\Executed;
 use Studio\Totem\Events\Executing;
 
@@ -16,9 +17,11 @@ class ConsoleServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app->resolving(Schedule::class, function ($schedule) {
-            $this->schedule($schedule);
-        });
+        if ($this->isScheduleCurrentCommand()) {
+            $this->app->resolving(Schedule::class, function ($schedule) {
+                $this->schedule($schedule);
+            });
+        }
     }
 
     /**
@@ -54,5 +57,12 @@ class ConsoleServiceProvider extends ServiceProvider
                 $event->onOneServer();
             }
         });
+    }
+
+    protected function isScheduleCurrentCommand()
+    {
+        $args = request()->server('argv');
+
+        return !empty($args[1]) && Str::contains($args[1], 'schedule');
     }
 }

@@ -24,7 +24,9 @@ class TotemServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app->register(ConsoleServiceProvider::class);
+        if ($this->app->runningInConsole()) {
+            $this->app->register(ConsoleServiceProvider::class);
+        }
 
         $this->registerResources();
         $this->defineAssetPublishing();
