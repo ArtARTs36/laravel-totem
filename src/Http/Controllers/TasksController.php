@@ -54,9 +54,9 @@ class TasksController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create()
+    public function create(Totem $totem)
     {
-        $commands = Totem::getCommands()->map(function ($command) {
+        $commands = $totem::getCommands()->map(function ($command) {
             return ['name' => $command->getName(), 'description' => $command->getDescription()];
         });
 
