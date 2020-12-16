@@ -63,6 +63,23 @@ class Totem
      */
     public static function getCommands()
     {
+        $return = function ($all_commands) {
+            return $all_commands->sortBy(function (Command $command) {
+                $name = $command->getName();
+                if (mb_strpos($name, ':') === false) {
+                    $name = ':'.$name;
+                }
+
+                return $name;
+            });
+        };
+
+        if (! empty(config('totem.artisan.concrete_commands'))) {
+            return $return(collect(array_map(function ($command) {
+                return app()->make($command);
+            }, config('totem.artisan.concrete_commands'))));
+        }
+
         $command_filter = config('totem.artisan.command_filter');
         $whitelist = config('totem.artisan.whitelist', true);
         $all_commands = collect(Artisan::all());
@@ -79,14 +96,7 @@ class Totem
             });
         }
 
-        return $all_commands->sortBy(function (Command $command) {
-            $name = $command->getName();
-            if (mb_strpos($name, ':') === false) {
-                $name = ':'.$name;
-            }
-
-            return $name;
-        });
+        return $return($all_commands);
     }
 
     /**
